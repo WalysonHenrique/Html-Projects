@@ -1,0 +1,149 @@
+Emitir alerta :
+{
+	window.alert()
+}
+
+############################################################################################################
+
+Pedir comfirmação :
+{
+	window.comfirm()
+}
+############################################################################################################
+
+Pedir algum dado ao usuario :
+{
+	window.prompt()
+}
+############################################################################################################
+
+O '+' serve tanto para somar variáveis de números quanto contatenar (juntar)
+strings :
+
+var nome = 'walyson'
+var idade = 19
+
+nome + "possúi" + idade + "anos"
+saída vai ser 
+
+'walyson possúi 19 anos'
+
+Outro exemplo :
+
+var Number.perseInt(n1 = 2)
+var Number.perseint(n2 = 4)
+n1 + n2
+
+saída vai ser 
+
+6
+############################################################################################################
+
+A crase `` evita usar + para concatenar variaves na frase, mas para usar-las
+é necessário utilizar ${nome da variavel} :
+
+var nome = 'walyson'
+var idade = 19
+
+`${nome} possúi ${idade} anos`
+
+saída vai ser 
+
+'walyson possúi 19 anos'
+
+############################################################################################################
+
+O comando nome_da_variavel.length informa a quantidade de letras dentro da variavel string :
+
+var nome = 'walyson'
+nome.length
+
+a saida vai ser 
+
+7
+
+############################################################################################################
+
+O comando nome_da_variavel.toUpperCase() serve para transformar toda a string em letras maiúsculas :
+
+var nome = 'walyson'
+nome.toUpperCase()
+
+a saida vai ser 
+
+'WALYSON'
+
+E para tornalas minúsculas, podemos usar o comando nome_da_variavel.toLowerCase() :
+
+var nome = 'WALYSON'
+nome.toLowerCase()
+
+a saida vai ser 
+
+'walyson'
+
+
+
+############################################################################################################
+
+O comando document.write() escreve algo na pagina
+
+
+
+############################################################################################################
+
+O comando h1, h2 ... transforma uma frase em titulo
+
+############################################################################################################
+
+O comando nome_da_variavel.toFixed() seleciona quantas casas depois da virgula serão exibidas : 
+
+var numero = 153.552456
+numero.toFixed(2)
+
+a saida vai ser 
+
+153.55
+
+E o comando nome_da_variavel.replace('.', ',') transforma o pont em virgua, desse jeito : 
+
+var numero = 153.552456
+numero.toFixed(2).replace('.', ',')
+
+a saida vai ser
+
+153,55
+
+############################################################################################################
+
+O comando nome_da_variavel.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'}) formata 
+o numero para valor monetário brasileiron no caso real R$ :
+
+var numero = 1500.232
+numero.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+
+a saida vai ser 
+
+R$ 1500,23
+
+############################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
