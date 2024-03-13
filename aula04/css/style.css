@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
+
+body{
+    background-image: url(https://pbs.twimg.com/media/FXKqJ5NWQAASEcm.png);
+    
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline-block;
+
+}
+
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+h1 {
+    text-align: center;
+    margin: 1.5em;
+    font-size: 10em;
+    font-family: "Anta", sans-serif;
+    color: white;
+
+}
+
+
+
+
+figure img {
+    width: 20%;
+    margin-left: 50em;
+}
+
+#menu_principal {
+    background-color: rgb(8, 73, 2);
+    text-align: center;
+    margin-top: 2em;
+    padding: 2em;
+}
+
+#menu_principal a {
+    text-decoration: none;
+    color: white;
+    margin: .3em;
+    padding: 1em;
+    background-color: rgb(27, 165, 0);
+    border-radius: .8em;
+    text-align: center;
+}
+
+
+#menu_principal a:hover {
+    transition-duration: 500ms;
+    background-color: rgb(125, 230, 56);
+
+}
