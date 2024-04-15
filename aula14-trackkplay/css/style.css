@@ -58,19 +58,19 @@
 
 
 .btn:nth-child(2) img{
-    left: 59em;
-}
-
-.btn:nth-child(3) img{
     left: 62em;
 }
 
-.btn:nth-child(4) img{
+.btn:nth-child(3) img{
     left: 65em;
 }
 
-.btn:nth-child(5) img{
+.btn:nth-child(4) img{
     left: 68em;
+}
+
+.btn:nth-child(5) img{
+    left: 72em;
 }
 
 
