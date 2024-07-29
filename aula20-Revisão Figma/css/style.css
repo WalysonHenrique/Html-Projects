@@ -1,0 +1,97 @@
+*{
+margin: 0%;
+background-color: black;
+}
+
+
+main{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: 12em;
+    width: 60%;
+    height: 90%;
+    flex-direction: row;
+    gap: 1em;
+    
+}
+
+
+figure{
+    width: 30%;
+    margin-left: 0em;
+}
+
+figure img{
+    width: 120%;
+}
+
+.Pai{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 60%;
+    gap: 2em;
+}
+
+.Escrita{
+    width: 90%;
+    flex-direction: column;
+    
+}
+
+.Titulo{
+    color: aliceblue;
+}
+
+.Subtitulo{
+    color: aliceblue;
+}
+
+.strong{
+    color: aqua;
+}
+
+.links{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.linkGit{
+    background-color: aqua;
+    padding: 1em 3.5em;
+    border-radius: .6em;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    
+}
+
+.linkInsta{
+    background-color: aqua;
+    padding: 1em 3.5em;
+    border-radius: .6em;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+
+.krona-one-regular {
+    font-family: "Krona One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 36px;
+  }
+  
+
+  .montserrat {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 24px;
+  }
