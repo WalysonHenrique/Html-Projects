@@ -1,0 +1,47 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+header{
+    background-color: aqua;
+    margin-bottom: 1em;
+}
+body{
+    padding: .5em;
+}
+
+.frm-anime fieldset{
+    gap: 1em;
+    padding: .5em;
+}
+
+.frm-anime input,
+.frm-anime label,
+.frm-anime select{
+    display: block;
+
+}
+
+.frm-anime input,
+.frm-anime select{
+    padding: .3em;
+
+}
+
+.frm-anime label{
+    margin-top: .5em;
+}
+
+.frm-anime_botoes{
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.frm-anime_botoes input{
+    width: 5em;
+    padding: .3em;
+}
+
+
+
