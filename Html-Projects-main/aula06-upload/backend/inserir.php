@@ -28,7 +28,12 @@ VALUES ('$nome', '$categoria')";
 
 if ($conn->query($sql) === TRUE) {
     $last_id = $conn->insert_id;
+
+    $url = "AULA06-UPLOAD/cadastro.php?id=" . urldecode($insert_id);
+    header("Location: " . $url);
+    
   echo "New record created successfully";
+
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
@@ -42,4 +47,6 @@ $conn->close();
 
 
 
+
 ?>
+

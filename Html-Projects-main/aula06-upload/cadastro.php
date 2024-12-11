@@ -1,3 +1,17 @@
+<?php 
+
+if (isset($_GET['id'])){
+    $last_id = $_GET['id'];
+
+
+    echo''.$last_id.'';
+}
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +22,11 @@
 <body>
     <main>
         <form action="file.php" method="post">
+
+
+
+
+
             <label for="">Inserir imagem</label>
             <input type="file" name="imagem" id="imagem" >
             
@@ -16,3 +35,6 @@
     </main>
 </body>
 </html>
+
+
+
