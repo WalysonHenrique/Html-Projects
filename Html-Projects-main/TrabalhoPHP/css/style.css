@@ -28,5 +28,12 @@
 
 .spacenav{
     background-color: #19467e;
-    padding-top: 2em;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+
+.spacenav h6{
+    color: aliceblue;
 }
