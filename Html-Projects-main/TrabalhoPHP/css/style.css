@@ -96,3 +96,35 @@ main {
     background-color: rgb(255, 255, 255);
     width: 60%;
 }
+
+
+.btnCadastrar{
+    margin-left: 2em;
+}
+
+
+.blocoFiltros{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 3em;
+    
+ 
+}
+
+.filtros{
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 60%;
+}
+
+.formulario{
+    width: 100%;
+    display:flex;
+}
+
+.form-group{
+    padding: 1em;
+}

@@ -2,7 +2,7 @@
 include_once("../TrabalhoPHP/model/carrosModel.php");
 $db = new CarrosModel();
 $carros = $db->getCarros();
-$db ->closeConnection();
+$db->closeConnection();
 ?>
 
 <!DOCTYPE html>
@@ -34,35 +34,56 @@ $db ->closeConnection();
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="navbar-brand" href="#">Navbar</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Features</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Pricing</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown link
+                                <a class="navbar-brand" href="index.php">
+                                    <img src="./img/logoGrupoSinal.avif" alt="logo sinal">
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Zero Km</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Seminovos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Tabela FIPE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Serviços e Peças</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Financiamento</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Vendas Diretas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Lojas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <img src="./img/search_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg" alt="lupa"> Buscar
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <img src="./img/person_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg" alt="Conta"> Entrar
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <img src="./img/favorite_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg" alt="Favoritos"> Favoritos
+                                </a>
+                            </li>
+
+                            <button type="button" class="btn btn-primary me-3 btnCadastrar" data-bs-toggle="modal"
+                                data-bs-target="#modalCadastro">
+                                Cadastrar novo carro
+                            </button>
                         </ul>
                     </div>
                 </div>
             </nav>
-            <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
-                        data-bs-target="#modalCadastro">
-                        Cadastrar novo carro
-                    </button>
+
         </section>
     </header>
 
@@ -142,23 +163,42 @@ $db ->closeConnection();
                 </a>
             </div>
 
-            <div class="filtors">
-            <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Marcas
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="conexao.php">testar</a></li>
-                <li><a class="dropdown-item" href="model/cadastrar.php">Cadastrar veiculo</a></li>
-                <li><a class="dropdown-item" href="#">Honda</a></li>
-            </ul>
+
         </div>
+
+        <div class="blocoFiltros">
+            <div class="filtros">
+                <form action="POST"  class="formulario">
+                    <div class="form-group col-md-3">
+                        <select id="inputState" class="form-control">
+                            <option selected>MARCA</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <select id="inputState" class="form-control">
+                            <option selected>MODELO</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <select id="inputState" class="form-control">
+                            <option selected>VERSÃO</option>
+                            <option>...</option>
+                        </select>
+                    </div>
 
             </div>
+            <div class="sigin"></div>
         </div>
+        <br>
+        <div class="buscaCarro">ou</div>
+        
+
+        </form>
 
         <section>
-        <div class="modal fade" id="modalAtualizacao" tabindex="-1" aria-labelledby="modalAtualizacaoLabel"
+            <div class="modal fade" id="modalAtualizacao" tabindex="-1" aria-labelledby="modalAtualizacaoLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -192,36 +232,36 @@ $db ->closeConnection();
             </div>
         </section>
         <section>
-        <div class="modal fade" id="modalCadastro" tabindex="-1" aria-labelledby="modalCadastroLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="modalCadastroLabel">Cadastrar novo carro</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+            <div class="modal fade" id="modalCadastro" tabindex="-1" aria-labelledby="modalCadastroLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modalCadastroLabel">Cadastrar novo carro</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="controller/cadastroCarroController.php" method="post" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="descricao" class="col-form-label"
+                                        style="color: black">Descricao:</label>
+                                    <textarea class="form-control" id="descricao" name="descricao"></textarea>
                                 </div>
-                                <div class="modal-body">
-                                    <form action="controller/cadastroCarroController.php" method="post" enctype="multipart/form-data">
-                                        <div class="mb-3">
-                                            <label for="descricao" class="col-form-label"
-                                                style="color: black">Descricao:</label>
-                                            <textarea class="form-control" id="descricao" name="descricao"></textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="preco" class="col-form-label" style="color: black">Preço:</label>
-                                            <input type="text" class="form-control" id="preco" name="preco">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="imagem">Imagem do Carro:</label>
-                                            <input type="file" id="imagem" name="imagem" accept="image/*" required>
-                                        </div>
-                                        <input type="submit" value="Cadastrar Carro">
-                                    </form>
+                                <div class="mb-3">
+                                    <label for="preco" class="col-form-label" style="color: black">Preço:</label>
+                                    <input type="text" class="form-control" id="preco" name="preco">
                                 </div>
-                            </div>
+                                <div class="mb-3">
+                                    <label for="imagem">Imagem do Carro:</label>
+                                    <input type="file" id="imagem" name="imagem" accept="image/*" required>
+                                </div>
+                                <input type="submit" value="Cadastrar Carro">
+                            </form>
                         </div>
                     </div>
+                </div>
+            </div>
         </section>
 
 
@@ -237,16 +277,16 @@ $db ->closeConnection();
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
-        const modalAtualizacao = document.getElementById('modalAtualizacao');
-        modalAtualizacao.addEventListener('show.bs.modal', event => {
-            const button = event.relatedTarget;
+    const modalAtualizacao = document.getElementById('modalAtualizacao');
+    modalAtualizacao.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget;
 
-            const id = button.getAttribute('data-id');
-            const descricao = button.getAttribute('data-descricao');
-            const precoLocacao = button.getAttribute('data-preco');
+        const id = button.getAttribute('data-id');
+        const descricao = button.getAttribute('data-descricao');
+        const precoLocacao = button.getAttribute('data-preco');
 
-            modalAtualizacao.querySelector('#id').value = id;
-            modalAtualizacao.querySelector('#descricao').value = descricao;
-            modalAtualizacao.querySelector('#preco').value = preco;
-        });
-    </script>
+        modalAtualizacao.querySelector('#id').value = id;
+        modalAtualizacao.querySelector('#descricao').value = descricao;
+        modalAtualizacao.querySelector('#preco').value = preco;
+    });
+</script>
