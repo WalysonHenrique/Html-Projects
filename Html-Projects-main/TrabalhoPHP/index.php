@@ -165,10 +165,14 @@ $db->closeConnection();
 
 
         </div>
-
+        <div class="blocoTitulo">
+            <h5 class="tituloFiltros">ENCONTRE SEU VEÍCULO</h5>
+        </div>
         <div class="blocoFiltros">
+
             <div class="filtros">
-                <form action="POST"  class="formulario">
+
+                <form action="/submit" method="GET" class="formulario">
                     <div class="form-group col-md-3">
                         <select id="inputState" class="form-control">
                             <option selected>MARCA</option>
@@ -187,15 +191,74 @@ $db->closeConnection();
                             <option>...</option>
                         </select>
                     </div>
-
+                    <div class="btnSubmit">
+                        <button type="submit" class="btn btn-primary" >
+                            VER VEÍCULOS
+                            <img src="./img/arrow_forward_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="Seta">
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="sigin"></div>
+
+
+
         </div>
         <br>
-        <div class="buscaCarro">ou</div>
-        
 
-        </form>
+        <section id="exibir-carros">
+        <?php
+            if ($carros->num_rows > 0) {
+                while ($row = $carros->fetch_assoc()) {
+                    echo "<div class='card'>
+                    <img src='./img/" . $row["imagem"] . "' class='card-img-top' alt='" . $row["descricao"] . "'>
+                    <div class='card-body'>
+                        <h5 class='card-title'>" . $row["descricao"] . "</h5>
+                        
+                        <button type='button' class='btn btn-primary me-3' 
+                            data-bs-toggle='modal' 
+                            data-bs-target='#modalAtualizacao' 
+                            data-ID='" . $row['id'] . "; ?>' 
+                            data-descricao='" . $row['descricao'] . "' 
+                            Editar
+                        </button>
+
+                        <a href='controller/excluirCarroController.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Tem certeza que deseja excluir este item?\");'>Excluir</a>
+                    </div>
+                </div>";
+                }
+            } else {
+                echo "<p>Nenhum Carro encontrado</p>";
+            }
+            ?>
+            <div class="modal fade" id="modalAtualizacao" tabindex="-1" aria-labelledby="modalAtualizacaoLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modalCadastroLabel">Cadastrar novo ator</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="./controller/atualizarAtorController.php" method="post" enctype="multipart/form-data">
+                                <input type="hidden" id="ator_id" name="ator_id">
+
+                                <div class="mb-3">
+                                    <label for="nome" class="col-form-label" style="color: black">Nome:</label>
+                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="">
+                                </div>
+                                <input type="submit" value="Atualizar Ator">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
 
         <section>
             <div class="modal fade" id="modalAtualizacao" tabindex="-1" aria-labelledby="modalAtualizacaoLabel"

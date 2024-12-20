@@ -9,8 +9,7 @@ body {
 
 main {
     background-color: rgb(245, 245, 245);   
-    
-    
+
 }
 
 
@@ -107,9 +106,22 @@ main {
     justify-content: center;
     align-items: center;
     display: flex;
+
+   
+}
+.blocoTitulo{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.tituloFiltros{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: white;
+    width: 60%;
     margin-top: 3em;
-    
- 
+    margin-bottom: 0em;
 }
 
 .filtros{
@@ -123,8 +135,22 @@ main {
 .formulario{
     width: 100%;
     display:flex;
+    align-items: center;
 }
 
 .form-group{
     padding: 1em;
+}
+
+.btnSubmit{
+    align-items: center;
+    justify-content: center;
+}
+
+.btnEnviar{
+    padding-top: 0em;
+    padding-bottom: 0em;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
