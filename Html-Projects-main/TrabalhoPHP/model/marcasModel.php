@@ -1,5 +1,5 @@
 <?php
-class CarrosModel {
+class MarcasModel {
     public $servername = "localhost";
     private $username = "root";
     private $password = "root";
@@ -15,22 +15,18 @@ class CarrosModel {
         }
     }
 
-    public function getCarros() {
-        $sql = "SELECT carro.id, carro.descricao, carro.ano, carro.preco, carro.imagem, 
-               marca.nome AS nomeMarca, marca.nomeImagem
-        FROM carro
-        JOIN marca ON carro.idMarcaCarro = marca.idMarca";
-
+    public function getMarca() {
+        $sql = "SELECT * FROM marca";
         $result = $this->conn->query($sql);
         return $result;
     }
 
-    public function excluirCarro($id) {
-        $sql = "DELETE FROM carro WHERE id = ?";
+    public function excluirMarca($id) {
+        $sql = "DELETE FROM marca WHERE idMarca = ?";
         $stmt = $this->conn->prepare($sql);
     
         if ($stmt) {
-            $stmt->bind_param("i", $id);
+            $stmt->bind_param("i", $idMarca);
             $stmt->execute();
             $stmt->close();
             return true;
@@ -39,11 +35,11 @@ class CarrosModel {
         }
     }
 
-    public function cadastrarCarro( $descricao, $preco ,$nomeImagem, $marca, $ano) {
-        $sql = "INSERT INTO carro (descricao, preco,  imagem, idMarcaCarro, ano) VALUES (?, ?, ?, ?, ?)";
+    public function cadastrarMarca( $nome,$nomeImagem) {
+        $sql = "INSERT INTO marca (nome,  nomeImagem) VALUES (?, ?)";
     
         if ($stmt = $this->conn->prepare($sql)) {
-            $stmt->bind_param("sdsss",  $descricao, $preco, $nomeImagem, $marca, $ano);
+            $stmt->bind_param("ss",  $nome, $nomeImagem);
             $executou = $stmt->execute();
             $stmt->close();
     
@@ -53,12 +49,12 @@ class CarrosModel {
         }
     }
 
-    public function atualizarCarro($id, $titulo, $descricao, $preco) {
-        $sql = "UPDATE carro SET descricao = ?, preco = ?  WHERE filmes_id = ?";
+    public function atualizarMarca($id, $nome, $nomeImagem) {
+        $sql = "UPDATE marca SET nome = ?, imgMarca = ?  WHERE idMarca = ?";
         $stmt = $this->conn->prepare($sql);
     
         if ($stmt) {
-            $stmt->bind_param("sdi",$descricao, $preco, $id);
+            $stmt->bind_param("ssi",$nome, $nomeImagem, $id);
             $executou = $stmt->execute();
             $stmt->close();
     

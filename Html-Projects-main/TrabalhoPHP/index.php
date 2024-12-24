@@ -4,6 +4,12 @@ $db = new CarrosModel();
 $carros = $db->getCarros();
 $db->closeConnection();
 ?>
+<?php
+include_once("../TrabalhoPHP/model/marcasModel.php");
+$db = new MarcasModel();
+$marcas = $db->getMarca();
+$db->closeConnection();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,8 +45,9 @@ $db->closeConnection();
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Zero Km</a>
+                                <a class="nav-link" href="#">Zero Km</a>
                             </li>
+                            <span></span>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Seminovos</a>
                             </li>
@@ -77,7 +84,11 @@ $db->closeConnection();
 
                             <button type="button" class="btn btn-primary me-3 btnCadastrar" data-bs-toggle="modal"
                                 data-bs-target="#modalCadastro">
-                                Cadastrar novo carro
+                                Novo carro
+                            </button>
+                            <button type="button" class="btn btn-primary me-3 btnCadastrar" data-bs-toggle="modal"
+                                data-bs-target="#modalCadastroMarca">
+                                Nova marca
                             </button>
                         </ul>
                     </div>
@@ -157,11 +168,21 @@ $db->closeConnection();
                 <h4>NAVEGUE POR NOSSAS MARCAS</h4>
             </div>
 
-            <div class="logos">
-                <a href="./fiat.php">
-                    <img src="./img/logofiat.svg" alt="logo da fiat" width="100" height="100">
-                </a>
+            <section id="exibir-marcas">
+        <?php
+            if ($marcas->num_rows > 0) {
+                while ($row = $marcas->fetch_assoc()) {
+                    echo "<div class='card'>
+                    <img src='./img/logos/" . $row["nomeImagem"] . "' class='card-img-top' alt='" . $row["nome"] . "'>
+                </div>";
+                }
+            } else {
+                echo "<p>Nenhuma marca encontrada</p>";
+            }
+            ?>
+            
             </div>
+        </section>
 
 
         </div>
@@ -206,54 +227,51 @@ $db->closeConnection();
         <br>
 
         <section id="exibir-carros">
-        <?php
-            if ($carros->num_rows > 0) {
+    <div class="container">
+        <div class="row">
+            <?php
+            if (isset($carros) && $carros->num_rows > 0) {
                 while ($row = $carros->fetch_assoc()) {
-                    echo "<div class='card'>
-                    <img src='./img/" . $row["imagem"] . "' class='card-img-top' alt='" . $row["descricao"] . "'>
-                    <div class='card-body'>
-                        <h5 class='card-title'>" . $row["descricao"] . "</h5>
-                        
-                        <button type='button' class='btn btn-primary me-3' 
-                            data-bs-toggle='modal' 
-                            data-bs-target='#modalAtualizacao' 
-                            data-ID='" . $row['id'] . "; ?>' 
-                            data-descricao='" . $row['descricao'] . "' 
-                            Editar
-                        </button>
-
-                        <a href='controller/excluirCarroController.php?id=" . $row["id"] . "' class='btn btn-danger' onclick='return confirm(\"Tem certeza que deseja excluir este item?\");'>Excluir</a>
-                    </div>
-                </div>";
+                    echo "<div class='col-md-4 col-lg-3 mb-4'>
+                            <div class='card h-100'>
+                                <!-- Imagem principal do carro -->
+                                <img src='./img/carros/" . htmlspecialchars($row["imagem"]) . "' 
+                                     class='card-img-top' 
+                                     alt='" . htmlspecialchars($row["descricao"]) . "'>
+                                <div class='card-body'>
+                                    <!-- Informações do carro -->
+                                    <h5 class='card-title'>" . htmlspecialchars($row["descricao"]) . "</h5>
+                                    <p class='card-text'>Ano: " . htmlspecialchars($row["ano"]) . "</p>
+                                    <p class='card-text'>Marca: " . htmlspecialchars($row["nomeMarca"]) . "</p>
+                                    <p class='card-text'>Preço: R$ " . number_format($row["preco"], 2, ',', '.') . "</p>
+                                    <!-- Logo da marca -->
+                                    <div class='text-center mt-3'>
+                                        <img src='./img/logos/" . htmlspecialchars($row["nomeImagem"]) . "' 
+                                             alt='Logo " . htmlspecialchars($row["nomeMarca"]) . "' 
+                                             class='img-fluid' style='width: 50px; height: auto;'>
+                                    </div>
+                                    <!-- Botão para abrir página de detalhes -->
+                                    <a href='detalhes.php?id=" . htmlspecialchars($row["id"]) . "' 
+                                       class='btn btn-primary mt-3' 
+                                       aria-label='Ver detalhes sobre " . htmlspecialchars($row["descricao"]) . "'>
+                                        Ver Detalhes
+                                    </a>
+                                </div>
+                            </div>
+                          </div>";
                 }
             } else {
-                echo "<p>Nenhum Carro encontrado</p>";
+                echo "<div class='col-12'>
+                        <p class='text-center'>Nenhum carro encontrado</p>
+                      </div>";
             }
             ?>
-            <div class="modal fade" id="modalAtualizacao" tabindex="-1" aria-labelledby="modalAtualizacaoLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="modalCadastroLabel">Cadastrar novo ator</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="./controller/atualizarAtorController.php" method="post" enctype="multipart/form-data">
-                                <input type="hidden" id="ator_id" name="ator_id">
+        </div>
+    </div>
+</section>
 
-                                <div class="mb-3">
-                                    <label for="nome" class="col-form-label" style="color: black">Nome:</label>
-                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="">
-                                </div>
-                                <input type="submit" value="Atualizar Ator">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
+
 
 
 
@@ -294,32 +312,92 @@ $db->closeConnection();
                 </div>
             </div>
         </section>
+
+<?php
+include_once("../TrabalhoPHP/model/marcasModel.php");
+$db = new MarcasModel();
+$marcas = $db->getMarca();
+?>
         <section>
-            <div class="modal fade" id="modalCadastro" tabindex="-1" aria-labelledby="modalCadastroLabel"
+    <div class="modal fade" id="modalCadastro" tabindex="-1" aria-labelledby="modalCadastroLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalCadastroLabel">Cadastrar novo carro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="controller/cadastroCarroController.php" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="descricao" class="col-form-label" style="color: black">Descrição:</label>
+                            <textarea class="form-control" id="descricao" name="descricao"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ano" class="col-form-label" style="color: black">Ano:</label>
+                            <textarea class="form-control" id="ano" name="ano"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="marca" class="col-form-label" style="color: black">Marca:</label>
+                            <select class="form-control" id="idMarca" name="idMarca">
+                                <option selected>Escolha uma marca</option>
+                                <?php
+                                    if ($marcas->num_rows > 0) {
+                                        while ($row = $marcas->fetch_assoc()) {
+                                            // Usando idMarca ao invés de id
+                                            echo "<option value='" . $row['idMarca'] . "'>" . htmlspecialchars($row['nome']) . "</option>";
+                                        }
+                                    } else {
+                                        echo "<option disabled>Nenhuma marca encontrada</option>";
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="preco" class="col-form-label" style="color: black">Preço:</label>
+                            <input type="text" class="form-control" id="preco" name="preco">
+                        </div>
+                        <div class="mb-3">
+                            <label for="imagem">Imagem do Carro:</label>
+                            <input type="file" id="imagem" name="imagem" accept="image/*" required>
+                        </div>
+                        <input type="submit" value="Cadastrar Carro">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<?php
+include_once("../TrabalhoPHP/model/marcasModel.php");
+$db = new MarcasModel();
+$db->closeConnection();
+?>
+
+
+        <section>
+            <div class="modal fade" id="modalCadastroMarca" tabindex="-1" aria-labelledby="modalCadastroLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="modalCadastroLabel">Cadastrar novo carro</h1>
+                            <h1 class="modal-title fs-5" id="modalCadastroLabel">Cadastrar nova marca</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="controller/cadastroCarroController.php" method="post" enctype="multipart/form-data">
+                            <form action="controller/cadastroMarcaController.php" method="post" enctype="multipart/form-data">
                                 <div class="mb-3">
-                                    <label for="descricao" class="col-form-label"
-                                        style="color: black">Descricao:</label>
-                                    <textarea class="form-control" id="descricao" name="descricao"></textarea>
+                                    <label for="nome" class="col-form-label"
+                                        style="color: black">Nome da Marca:</label>
+                                    <textarea class="form-control" id="nome" name="nome"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="preco" class="col-form-label" style="color: black">Preço:</label>
-                                    <input type="text" class="form-control" id="preco" name="preco">
+                                    <label for="imgMarca">Imagem da Marca:</label>
+                                    <input type="file" id="nomeMarca" name="nomeMarca" accept="image/*" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="imagem">Imagem do Carro:</label>
-                                    <input type="file" id="imagem" name="imagem" accept="image/*" required>
-                                </div>
-                                <input type="submit" value="Cadastrar Carro">
+                                <input type="submit" value="Cadastrar Marca">
                             </form>
                         </div>
                     </div>
@@ -330,7 +408,76 @@ $db->closeConnection();
 
     </main>
 
-    <footer></footer>
+    <footer class="text-blue py-4">
+    <div class="container containerFooter">
+        <div class="row">
+            <!-- Primeira Coluna: Imagem do Site, Ofertas e Vendas Diretas -->
+            <div class="col-md-2">
+                <img src="img/logoGrupoSinal.avif" alt="Logo do Site" class="mb-3" style="max-width: 150px;">
+                <div class="mb-3">
+                    <a href="ofertas.html" class="btn btn-light w-100">Ofertas</a>
+                </div>
+                <div>
+                    <a href="vendas_diretas.html" class="btn btn-light w-100">Vendas Diretas</a>
+                </div>
+            </div>
+
+            <!-- Segunda Coluna: Institucional -->
+            <div class="col-md-2">
+                <h5>Institucional</h5>
+                <ul class="list-unstyled">
+                    <li><a href="quem_somos.html">Quem Somos</a></li>
+                    <li><a href="politica_privacidade.html">Política de Privacidade</a></li>
+                </ul>
+            </div>
+
+            <!-- Terceira Coluna: Pós-Vendas -->
+            <div class="col-md-2">
+                <h5>Pós-Vendas</h5>
+                <ul class="list-unstyled">
+                    <li><a href="revisao.html">Revisão</a></li>
+                    <li><a href="ofertas_pós_vendas.html">Ofertas Pós-Vendas</a></li>
+                </ul>
+            </div>
+
+            <!-- Quarta Coluna: Outros Serviços -->
+            <div class="col-md-2">
+                <h5>Outros Serviços</h5>
+                <ul class="list-unstyled">
+                    <li><a href="seguros.html">Seguros</a></li>
+                    <li><a href="concorcios.html">Consórcios</a></li>
+                    <li><a href="blindados.html">Blindados</a></li>
+                </ul>
+            </div>
+
+            <!-- Quinta Coluna: Atendimento -->
+            <div class="col-md-2">
+                <h5>Atendimento</h5>
+                <ul class="list-unstyled">
+                    <li><a href="fale_conosco.html">Fale Conosco</a></li>
+                    <li><a href="trabalhe_conosco.html">Trabalhe Conosco</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                    <li><a href="fornecedores.html">Fornecedores</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="row mt-4">
+            <div class="col text-center">
+                <p>&copy; 2024 Concessionária. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Link para os ícones das redes sociais (Font Awesome) -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+<!-- Link para os ícones das redes sociais (Font Awesome) -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 
 </body>
 
@@ -351,5 +498,27 @@ $db->closeConnection();
         modalAtualizacao.querySelector('#id').value = id;
         modalAtualizacao.querySelector('#descricao').value = descricao;
         modalAtualizacao.querySelector('#preco').value = preco;
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const carousel = document.querySelector('#carrosCarousel');
+        const carouselInstance = new bootstrap.Carousel(carousel, {
+            interval: false, // Desabilita a rotação automática
+            ride: false
+        });
+
+        // Customiza o comportamento para mover um item por vez
+        carousel.addEventListener('slide.bs.carousel', (e) => {
+            const items = document.querySelectorAll('.carousel-item');
+            const direction = e.direction === 'left' ? 1 : -1; // Define a direção
+            const currentIndex = Array.from(items).findIndex(item => item.classList.contains('active'));
+
+            const newIndex = (currentIndex + direction + items.length) % items.length;
+            items[newIndex].classList.add('active');
+            items[currentIndex].classList.remove('active');
+            e.preventDefault(); // Cancela o comportamento padrão
+        });
     });
 </script>
